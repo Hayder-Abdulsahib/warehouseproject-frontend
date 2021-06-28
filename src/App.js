@@ -36,6 +36,7 @@ function App() {
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
+
       <Switch>
         <Route exact path="/">
           <Home />
