@@ -11,18 +11,21 @@ import { createStore } from "redux";
 import { applyMiddleware, compose } from "redux"; //we add this
 import thunk from "redux-thunk"; //we add this
 import { Provider } from "react-redux";
-import reducer from "./store/reducer";
-import { fetchProduct } from "./store/actions";
+// import productReducer from "./store/reducers/productReducer";
+import rootReducer from "./store/reducers/rootReducer";
+import { fetchProduct } from "./store/actions/productActions";
+import { fetchBakery } from "./store/actions/bakeryActions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //we changed and added this
 
 // we add this to the store
 const store = createStore(
-  reducer, // reducer function
+  rootReducer, // reducer function
   composeEnhancers(applyMiddleware(thunk))
 );
 
 store.dispatch(fetchProduct());
+store.dispatch(fetchBakery());
 
 ReactDOM.render(
   <React.StrictMode>

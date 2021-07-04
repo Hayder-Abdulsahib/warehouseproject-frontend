@@ -68,6 +68,10 @@ export const ListWrapper = styled.div`
   display: flex;
 `;
 
+export const SignupButton = styled(Link)`
+  width: 8rem;
+`;
+
 export const Logo = styled(Link)`
   img {
     width: 8rem;
@@ -111,4 +115,8 @@ export const ThemeButton = styled.button`
 
 export const Title = styled.h1`
   text-align: center;
+`;
+
+export const BakeryItemImage = styled.img`
+  width: 20em;
 `;

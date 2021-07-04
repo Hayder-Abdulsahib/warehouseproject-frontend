@@ -10,7 +10,7 @@ import UpdateButton from "./buttons/UpdateButton";
 const ProductDetail = () => {
   const { productSlug } = useParams();
   const product = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.products.products.find((product) => product.slug === productSlug)
   );
 
   if (!product) return <Redirect to="/products" />;

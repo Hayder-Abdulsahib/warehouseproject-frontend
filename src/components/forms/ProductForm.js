@@ -1,4 +1,4 @@
-import { addProduct, updateProduct } from "../../store/actions";
+import { addProduct, updateProduct } from "../../store/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -7,13 +7,15 @@ import { useState } from "react";
 const ProductForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { productSlug } = useParams();
-  const foundProduct = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+  const { productSlug } = useParams(); //this is the same as //const productSlug = useParams().productSlug
+  const { bakerySlug } = useParams(); //the bakerySlug came from the app.js when we pass it in the route path like this "/bakeries/:bakerySlug/products/new"
+
+  const updatedProduct = useSelector((state) =>
+    state.products.products.find((product) => product.slug === productSlug)
   );
 
   const [product, setProduct] = useState(
-    foundProduct ?? {
+    updatedProduct ?? {
       name: "",
       price: 0,
       description: "",
@@ -29,14 +31,14 @@ const ProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (foundProduct) dispatch(updateProduct(product));
-    else dispatch(addProduct(product));
+    if (updatedProduct) dispatch(updateProduct(product));
+    else dispatch(addProduct(product, bakerySlug));
     history.push("/products");
   };
 
   return (
     <form className="container" onSubmit={handleSubmit}>
-      <h1>{foundProduct ? "Update" : "Create"} Product</h1>
+      <h1>{updatedProduct ? "Update" : "Create"} Product</h1>
       <div className="mb-3">
         <label className="form-label">Name</label>
         <input
@@ -77,7 +79,7 @@ const ProductForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-info float-right">
-        {foundProduct ? "Update" : "Create"}
+        {updatedProduct ? "Update" : "Create"}
       </button>
     </form>
   );

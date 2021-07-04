@@ -1,4 +1,4 @@
-import { deleteProduct } from "../../store/actions";
+import { deleteProduct } from "../../store/actions/productActions";
 import { useDispatch } from "react-redux";
 
 const DeleteButton = ({ productId }) => {

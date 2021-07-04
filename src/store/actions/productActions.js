@@ -6,13 +6,16 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 
 // ACTIONS
-export const addProduct = (newProduct) => {
+export const addProduct = (newProduct, bakeryId) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
       for (const key in newProduct) formData.append(key, newProduct[key]);
 
-      const res = await axios.post("http://localhost:8000/products", formData);
+      const res = await axios.post(
+        `http://localhost:8000/bakeries/${bakeryId}/products`, //we get the bakeryId from the product form as we define it in the product state
+        formData
+      );
       dispatch({
         type: ADD_PRODUCT,
         payload: { newProduct: res.data },
@@ -35,8 +38,6 @@ export const deleteProduct = (productId) => {
       console.log(error);
     }
   };
-  // type: DELETE_PRODUCT,
-  // payload: { productId: productId },
 };
 
 export const updateProduct = (updatedProduct) => {
@@ -59,9 +60,6 @@ export const updateProduct = (updatedProduct) => {
     }
   };
 };
-
-// type: UPDATE_PRODUCT,
-//   payload: { updatedProduct: updatedProduct },
 
 export const fetchProduct = () => {
   return async (dispatch) => {

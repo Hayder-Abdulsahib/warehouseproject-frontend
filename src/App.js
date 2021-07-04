@@ -1,15 +1,14 @@
-import { Route, Switch } from "react-router";
-
 // Styling
 import { GlobalStyle } from "./styles";
-import Home from "./components/Home";
+import { ThemeProvider } from "styled-components";
+import BeatLoader from "react-spinners/BeatLoader";
+
 import NavBar from "./components/NavBar";
 // Components
-import ProductDetail from "./components/ProductDetail";
-import ProductForm from "./components/forms/ProductForm";
-import ProductList from "./components/ProductList";
-import { ThemeProvider } from "styled-components";
+import Routes from "./components/Routes";
+
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const theme = {
   light: {
@@ -27,6 +26,9 @@ const theme = {
 };
 
 function App() {
+  const products = useSelector((state) => state.products.products);
+  const loadingProducts = useSelector((state) => state.products.loading);
+  const loadingBakeries = useSelector((state) => state.bakeries.loading);
   const [currentTheme, setCurrentTheme] = useState("light");
 
   const toggleTheme = () =>
@@ -37,20 +39,11 @@ function App() {
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
 
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path={["/products/new", "/products/:productSlug/edit"]}>
-          <ProductForm />
-        </Route>
-        <Route path="/products/:productSlug">
-          <ProductDetail />
-        </Route>
-        <Route path="/products">
-          <ProductList />
-        </Route>
-      </Switch>
+      {loadingProducts || loadingBakeries ? (
+        <BeatLoader size={20} />
+      ) : (
+        <Routes products={products} />
+      )}
     </ThemeProvider>
   );
 }
