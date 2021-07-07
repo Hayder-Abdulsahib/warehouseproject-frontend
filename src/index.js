@@ -15,7 +15,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { fetchProduct } from "./store/actions/productActions";
 import { fetchBakery } from "./store/actions/bakeryActions";
-
+import { checkForToken } from "./store/actions/authActions";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //we changed and added this
 
 // we add this to the store
@@ -26,6 +26,7 @@ const store = createStore(
 
 store.dispatch(fetchProduct());
 store.dispatch(fetchBakery());
+store.dispatch(checkForToken());
 
 ReactDOM.render(
   <React.StrictMode>

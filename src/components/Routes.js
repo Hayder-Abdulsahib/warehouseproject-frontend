@@ -7,8 +7,9 @@ import ProductList from "./ProductList";
 import BakeryList from "./BakeryList";
 import BakeryDetail from "./BakeryDetail";
 import Signup from "./forms/Signup";
+import Signin from "./forms/Signin";
 
-const Routes = ({ products }) => {
+const Routes = (props) => {
   return (
     <Switch>
       <Route
@@ -32,7 +33,10 @@ const Routes = ({ products }) => {
       </Route>
 
       <Route path="/products">
-        <ProductList products={products} />
+        <ProductList products={props.products} />
+      </Route>
+      <Route path="/signin">
+        <Signin />
       </Route>
 
       <Route path="/signup">

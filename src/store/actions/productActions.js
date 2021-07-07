@@ -36,6 +36,14 @@ export const deleteProduct = (productId) => {
       });
     } catch (error) {
       console.log(error);
+      //we will chnage the log above into this console.log(error.message.include("401"));
+      //and also we can change it to if condition the wrap the dispatch steatment under like this if(error.message.include("401")) {dispatch({type: payload:})}
+
+      //this part of code is usefull so that when the token is expiered and the user click on the delete button it will turn him back to the sighin page
+      // dispatch({
+      //   type: actionTypes.SET_USER,
+      //   payload: null,
+      // });
     }
   };
 };

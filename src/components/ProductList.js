@@ -5,11 +5,17 @@ import { ListWrapper } from "../styles";
 // Components
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
-// import { useSelector } from "react-redux";
+//react
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+//redux
+import { useSelector } from "react-redux";
 
 const ProductList = ({ products }) => {
+  const user = useSelector((state) => state.auth.user);
   const [query, setQuery] = useState("");
+  const history = useHistory();
+  if (!user) history.push("/");
 
   const productList = products
     .filter((product) =>

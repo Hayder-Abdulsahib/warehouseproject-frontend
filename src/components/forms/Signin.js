@@ -1,19 +1,16 @@
-import { signUp } from "../../store/actions/authActions";
+import { signIn } from "../../store/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { useState } from "react";
 
-const Signup = () => {
+const Signin = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [user, setUser] = useState({
     username: "",
-    password: "",
-    email: "",
-    firstName: "",
-    lastName: "",
+    password: "", //we can leave this empty without the username and the password in this case if we want to
   });
 
   const handleChange = (event) =>
@@ -22,12 +19,12 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(signUp(user, history));
+    dispatch(signIn(user, history));
   };
 
   return (
     <form className="container" onSubmit={handleSubmit}>
-      <h1>SignUp Form</h1>
+      <h1>SignIn Form</h1>
       <div className="mb-3">
         <label className="form-label">username</label>
         <input
@@ -35,6 +32,7 @@ const Signup = () => {
           value={user.username}
           onChange={handleChange}
           name="username"
+          placeholder="enter username"
           className="form-control"
         />
       </div>
@@ -45,45 +43,16 @@ const Signup = () => {
           value={user.password}
           onChange={handleChange}
           name="password"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">email</label>
-        <input
-          type="email"
-          value={user.email}
-          onChange={handleChange}
-          name="email"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">firstName</label>
-        <input
-          type="text"
-          value={user.firstName}
-          onChange={handleChange}
-          name="firstName"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">lastName</label>
-        <input
-          type="text"
-          value={user.lastName}
-          onChange={handleChange}
-          name="lastName"
+          placeholder="enter password"
           className="form-control"
         />
       </div>
 
       <button type="submit" className="btn btn-info float-right">
-        SignUp
+        SignIn
       </button>
     </form>
   );
 };
 
-export default Signup;
+export default Signin;

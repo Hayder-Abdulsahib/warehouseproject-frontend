@@ -1,7 +1,9 @@
 import { Title } from "../styles";
 
 import { useSelector } from "react-redux";
+
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import BakeryItem from "./BakeryItem";
 
@@ -9,6 +11,10 @@ import SearchBar from "./SearchBar";
 
 const BakeryList = () => {
   const bakeries = useSelector((state) => state.bakeries.bakeries);
+  const user = useSelector((state) => state.auth.user);
+
+  const history = useHistory();
+  if (!user) history.push("/");
 
   const [query, setQuery] = useState("");
 
